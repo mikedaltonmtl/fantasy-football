@@ -3,7 +3,7 @@ import Main from "@/components/Main";
 import Container from "@/components/ui/container";
 import { ThemeProvider } from "next-themes";
 
-export default function Home() {
+export default function Home({ data }: any) {
   return (
     <Container>
       <ThemeProvider
@@ -13,8 +13,14 @@ export default function Home() {
         disableTransitionOnChange
       >
         <Header />
-        <Main />
+        <Main data={data} />
       </ThemeProvider>
     </Container>
   );
 }
+
+export const getServerSideProps = async function() {
+  const response = await fetch("https://fantasy.premierleague.com/api/bootstrap-static/");
+  const data = await response.json();
+  return { props: { data } };
+};

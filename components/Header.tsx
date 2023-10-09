@@ -1,5 +1,4 @@
 import * as React from "react";
-import Container from "@/components/ui/container";
 import { RowsIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 import { useTheme } from "next-themes";
@@ -26,67 +25,62 @@ export default function Header() {
     },
     {
       href: "/",
-      label: "My Stats",
+      label: "My Team",
     },
   ];
 
   return (
-    <header className="sm:flex sm:justify-between py-3 px-4 border-b">
-      <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
-          <div className="flex items-center">
-
-            {/* mobile dropdown menu */}
-            <Sheet>
-              <SheetTrigger>
-                <RowsIcon className="h-6 md:hidden w-6" />
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4">
-                  {routes.map((route) => (
-                    <Link key={route.label} href={route.href} className="block px-2 py-1 text-lg">
-                      {route.label}
-                    </Link>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-
-            {/* midsize and larger buttons */}
-            <nav className="mx-6 items-center space-x-4 lg:space-x-6 hidden md:block">
+    <header className="sm:flex sm:justify-between px-4 md:px-24 fixed left-0 top-0 w-full max-w-2xl bg-white m-0">
+      <div className="relative flex h-16 items-center min-w-full border-b p-0">
+        {/* mobile dropdown menu */}
+        <nav className="w-full px-2 pt-2 md:hidden">
+          <Sheet>
+            <SheetTrigger>
+              <RowsIcon className="h-[1.2rem] w-[1.2rem]" />
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] sm:w-[400px] flex flex-col gap-4">
               {routes.map((route) => (
-                <Button variant="ghost" key={route.label}>
-                  <Link href={route.href} className="text-sm font-medium transition-colors">
-                    {route.label}
-                  </Link>
-                </Button>
+                <Link key={route.label} href={route.href} className="block px-2 py-1 text-lg">
+                  {route.label}
+                </Link>
               ))}
-            </nav>
+            </SheetContent>
+          </Sheet>
+        </nav>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                  <span className="sr-only">Toggle theme</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        {/* midsize and larger buttons */}
+        <nav className="hidden md:flex justify-start w-full">
+          {routes.map((route) => (
+            <Button variant="ghost" key={route.label}>
+              <Link href={route.href} className="text-sm font-medium transition-colors">
+                {route.label}
+              </Link>
+            </Button>
+          ))}
+        </nav>
 
-          </div>
-        </div>
-      </Container>
+        {/* darkmode dropdown selector */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setTheme("light")}>
+              Light
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("dark")}>
+              Dark
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("system")}>
+              System
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </header>
   );
 }

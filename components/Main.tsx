@@ -5,16 +5,30 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import logos from "../app/logoUrls";
 
 
 export default function Main(data: any) {
   console.log(data.data);
   return (
-    <Accordion type="single" collapsible className="w-full max-w-2xl">
+    <Accordion type="single" collapsible className="w-full max-w-2xl px-4 md:px-24 mt-20">
       {data.data.teams.map((team: any) => {
         return (
           <AccordionItem key={team.id} value={team.id}>
-            <AccordionTrigger>{team.name}</AccordionTrigger>
+            <AccordionTrigger>
+              <div className="flex justify-start align-middle">
+                <Image
+                  src={logos[team.short_name]}
+                  width="0"
+                  height="0"
+                  sizes="100vw"
+                  className="w-auto h-[25px]"
+                  alt={team.name}
+                  priority={true}
+                />
+                <p className="mt-0.5 ml-2">{team.name}</p>
+              </div>
+            </AccordionTrigger>
             <AccordionContent>
               <Accordion type="single" collapsible className="pl-5 w-full max-w-2xl text-gray-500">
                 {data.data.elements.filter((element: any) => element.team === team.id).map((player: any) => {

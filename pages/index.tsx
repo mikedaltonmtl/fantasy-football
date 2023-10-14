@@ -1,8 +1,12 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
+import Wordle from "@/components/Wordle";
 import { ThemeProvider } from "next-themes";
+import { useState } from "react";
 
 export default function Home({ data }: any) {
+  const [show, setShow] = useState("Teams");
+  
   return (
     <ThemeProvider
       attribute="class"
@@ -10,8 +14,9 @@ export default function Home({ data }: any) {
       enableSystem
       disableTransitionOnChange
     >
-      <Header />
-      <Main data={data} />
+      <Header setShow={setShow} />
+      {show === "Teams" && <Main data={data} />}
+      {show === "Wordle" && <Wordle />}
     </ThemeProvider>
   );
 }

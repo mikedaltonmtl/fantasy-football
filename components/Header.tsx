@@ -20,7 +20,7 @@ export default function Header(props) {
     },
     {
       href: "/",
-      label: "Players",
+      label: "Framer",
     },
     {
       href: "/",

@@ -1,3 +1,4 @@
+import Framer from "@/components/Framer";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Wordle from "@/components/Wordle";
@@ -16,6 +17,7 @@ export default function Home({ data }: any) {
     >
       <Header setShow={setShow} />
       {show === "Teams" && <Main data={data} />}
+      {show === "Framer" && <Framer />}
       {show === "Wordle" && <Wordle />}
     </ThemeProvider>
   );
